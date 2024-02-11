@@ -11,4 +11,9 @@ export class CalcService {
     this.sharedService.mySharedFn();
     return a * b;
   }
+
+  add(a: number, b: number) {
+    this.sharedService.mySharedFn();
+    return a + b;
+  }
 }

@@ -3,25 +3,35 @@ import { TestBed } from '@angular/core/testing';
 import { CalcService } from './calc.service';
 import { SharedService } from './shared.service';
 
-describe('SerService', () => {
-  let service: CalcService;
+describe('CalcService', () => {
+  let calc: CalcService;
+  let shared: SharedService;
 
-  it('ttttt', () => {
-    const shared = new SharedService();
-    const calc = new CalcService(shared);
+  beforeEach(() => {
+    shared = jasmine.createSpyObj('SharedService', ['mySharedFn']);
+    TestBed.configureTestingModule({
+      providers: [CalcService, { provide: SharedService, useValue: shared }],
+    });
+    calc = TestBed.inject(CalcService);
+    shared = TestBed.inject(SharedService);
+  });
+
+  it('should multiply', () => {
     const result = calc.multiply(3, 5);
     expect(result).toBe(15);
   });
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CalcService);
+  it('should add', () => {
+    const result = calc.add(3, 5);
+    expect(result).toBe(8);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(calc).toBeTruthy();
+  });
+
+  it('should call mySharedFn', () => {
+    const result = calc.multiply(3, 5);
+    expect(shared.mySharedFn).toHaveBeenCalled();
   });
 });
-function sharedService() {
-  throw new Error('Function not implemented.');
-}
