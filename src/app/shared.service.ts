@@ -3,10 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class SerService {
+export class SharedService {
   constructor() {}
 
-  multyply(a: number, b: number) {
-    return a * b;
-  }
+  mySharedFn() {}
 }
