@@ -27,10 +27,10 @@ describe('DataService', () => {
     service.getAllUsers().subscribe((users: any) => {
       expect(users).toBeTruthy();
       expect(users.length).toBe(4);
-      const secUser = users.find((user: any) => user.id === 2); // Corrected usage of find method
+      const secUser = users.find((user: any) => user.id === 2);
       expect(secUser.name).toBe('dsacsd');
     });
-    const mockReq = testingController.expectOne('api/users'); // Corrected mock request URL
+    const mockReq = testingController.expectOne('api/users');
     mockReq.flush(Object.values(USERS));
   });
 });
